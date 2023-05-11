@@ -4,5 +4,5 @@ export const environment = {
   adminId: 'aifrica',
   adminPassword: 'aifrica1!',
   loginId: 'administrator',
-  gridaEndPoint: 'http://110.45.179.12:3309/'
+  gridaEndPoint: 'https://codemonkey-cors-anywhere.herokuapp.com/http://110.45.179.12:3309/'
 };
