@@ -1,0 +1,46 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: '주아체';
+  src: url('/assets/fonts/BMJUA_ttf.ttf');
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: "주아체" ; background-color: whitesmoke; }
+
+.markdown {
+
+  ol {
+    line-height: 0;
+    padding-right: 10px;
+    padding-inline-start: 1em;
+  }
+  
+  pre {
+    margin-top: -15px;
+    margin-bottom: 30px;
+  }
+}
+
+.markdown-clipboard-button {
+  background-color: rgba(255, 255, 255, 0.07);
+  border: none;
+  border-radius: 4px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 11px;
+  padding: 4px 0;
+  width: 50px;
+  transition: all 250ms ease-out;
+}
+
+.markdown-clipboard-button:hover {
+  background-color: rgba(255, 255, 255, 0.14);
+}
+
+.markdown-clipboard-button:active {
+  transform: scale(0.95);
+}
+
+.markdown-clipboard-button.copied {
+  background-color: rgba(0, 255, 0, 0.1);
+  color: #00ff00;
+}

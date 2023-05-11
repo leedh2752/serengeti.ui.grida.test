@@ -1,0 +1,134 @@
+<div class="create-container">
+  <ng-container *ngIf="generateImage">
+    <div class="text-container">
+      <h1>{{sttRequest.sttText}}</h1>
+      <span class="subtile">{{sttRequest.translatedText}}</span>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!generateImage">
+    <div class="text-container">
+
+      <span class="desc-text">그리다(GRIDA)와 음성으로 그림을 그려보세요.</span>
+      <span class="desc-text">"세렝게티에서 뛰어노는 치타"와 같이 한국어로 말해보세요.</span>
+    </div>
+  </ng-container>
+
+  <div class="mode-toggle-div">
+    <mat-button-toggle-group value="realistic" (change)="changeMode($event.value)">
+      <mat-button-toggle value="realistic">실사 모드</mat-button-toggle>
+      <mat-button-toggle value="artistic">그림 모드</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <ng-container *ngIf="!generateImage">
+    <ng-container *ngIf="!generatingImage">
+      <ng-container *ngIf="!isRecording">
+        <div class="stt-container">
+          <mat-icon (click)="generateImageToVoice()">settings_voice</mat-icon>
+        </div>
+
+        <div class="desc-container">
+          <span>버튼을 눌러 음성 녹음을 시작하세요.</span>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="isRecording">
+        <div class="stt-container">
+          <mat-icon (click)="generateImageToVoice()" [class.recording]="isRecording">graphic_eq</mat-icon>
+        </div>
+
+        <div class="desc-container">
+          <div class="isRecording">
+            <div>
+              <span>그리고 싶은 그림에 대해 설명해주세요.</span>
+            </div>
+            <div>
+              <span>ex) "세렝게티에서 뛰어노는 치타를 그려줘"</span>
+            </div>
+            <br>
+            <div>
+              <span>설명이 끝나면 버튼을 다시 한 번 눌러주세요.</span>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="generatingImage">
+      <div class="spinner-container">
+        <mat-spinner color="accent"></mat-spinner>
+      </div>
+
+      <div class="desc-container">
+        <span>그림을 그리고 있습니다. 잠시만 기다려주세요.</span>
+      </div>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="generateImage">
+    <ng-container *ngIf="sttRequest.status === 'draw'">
+      <div class="result-container">
+        <img [src]="image">
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="sttRequest.status === 'error'">
+      <div class="result-container">
+        <span>음성이 정확하지 않습니다. 다시 시도해주세요.</span>
+      </div>
+    </ng-container>
+
+    <div class="button-container">
+      <button mat-raised-button (click)="retry()">
+        <span>다시하기</span>
+      </button>
+
+      <ng-container *ngIf="sttRequest.status !== 'error' && !generateComplete">
+        <!-- <button mat-raised-button *ngIf="insertImage" (click)="create()">
+            <span>등록하기</span>
+        </button> -->
+        <button mat-raised-button (click)="download()">
+          <span>등록&저장</span>
+        </button>
+      </ng-container>
+    </div>
+  </ng-container>
+
+  <!--  <mat-form-field class="prompt-chip-list">-->
+  <!--    <mat-chip-list #chipList aria-label="Prompt selection">-->
+  <!--      <mat-chip class="prompt-chip"-->
+  <!--        *ngFor="let prompt of prompts"-->
+  <!--        [selectable]="selectable"-->
+  <!--        [removable]="removable"-->
+  <!--        (removed)="remove(prompt)">-->
+  <!--        {{prompt}}-->
+  <!--        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>-->
+  <!--      </mat-chip>-->
+  <!--      <input-->
+  <!--        placeholder="프롬프트를 추가해 주세요!"-->
+  <!--        #promptInput-->
+  <!--        [formControl]="promptCtrl"-->
+  <!--        [matAutocomplete]="auto"-->
+  <!--        [matChipInputFor]="chipList"-->
+  <!--        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"-->
+  <!--        [matChipInputAddOnBlur]="addOnBlur"-->
+  <!--        (matChipInputTokenEnd)="add($event)">-->
+  <!--    </mat-chip-list>-->
+  <!--    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">-->
+  <!--      <mat-option *ngFor="let prompt of filteredPrompts | async" [value]="prompt">-->
+  <!--        {{prompt}}-->
+  <!--      </mat-option>-->
+  <!--    </mat-autocomplete>-->
+  <!--  </mat-form-field>-->
+  <div class="grida-desc">
+    <span>지금까지 {{runCount}}명이 그리다 서비스를 이용해 주셨어요!</span>
+  </div>
+</div>
+
+<ng-container *ngIf="spinnering">
+  <div class="backgroud-spinner-container">
+    <mat-spinner color="accent"></mat-spinner>
+  </div>
+  <div class="background-container"></div>
+</ng-container>

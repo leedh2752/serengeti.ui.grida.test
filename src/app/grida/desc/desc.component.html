@@ -1,0 +1,60 @@
+<div class="desc-container">
+<!--    <div class="slide-container">-->
+<!--        <ng-container *ngFor="let image of imageList">-->
+<!--            <div class="slide-banner">-->
+<!--                <img [src]="image.url" [class.on]="image.id === currentImage">-->
+<!--            </div>-->
+<!--        </ng-container>-->
+
+<!--        <div class="button-container">-->
+<!--            <mat-icon (click)="slideButton('prev')">navigate_before</mat-icon>-->
+<!--            <mat-icon (click)="slideButton('next')">navigate_next</mat-icon>-->
+<!--        </div>-->
+<!--    </div>-->
+
+    <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/KAfNCK3oAYg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <div class="text-container">
+        <div [class.desc]="!moreText">
+            [한국어로 '말해서' 그림 그리는 AI 서비스]<br/>
+            <br/>
+            에이프리카에서 재미있는 데모를 만들었습니다. "세렝게티에서 뛰어노는 치타를 그려줘"라고 한국어로 이야기하면 해당 그림을 그려줍니다.<br/>
+            <br/>
+            말씀하실 때, [그려줘] 또는 [알려줘]로 끝내면 원하거나 궁금한 내용을 그립니다.<br/>
+            * 안드로이드, 웹브라우저 지원/ 아이폰X(개발 예정)<br/>
+            <br/>
+            그림 그리는 AI는 Stable Diffusion을 활용했습니다.<br/>
+            Stable Diffusion은 2022년에 출시된 딥 러닝 텍스트-이미지 모델입니다.<br/>
+            주로 텍스트 설명에 따라 세부 이미지를 생성하는데, 단 영어만을 지원합니다.<br/>
+            <br/>
+            영어 모르는 사람은 데모 써보기도 어렵겠지요? 그래서 에이프리카는 한국어로 말하면 그림을 그려주는 DEMO를 만들어 봤습니다.<br/>
+            <br/>
+            Stable Diffusion을 한국어로 훈련한 것은 아닙니다만 한국어로 서비스가 가능합니다. 어떻게 가능하냐고요?<br/>
+            <br/>
+            세렝게티에서는 GUI와 Low code로 여러 API나 코드를 쉽게 연결할 수 있는 백앤드 워크플로우를 구성할 수 있습니다.<br/>
+            <br/>
+            [그려줘] 세렝게티는 사용자가 "치타를 그려줘" 말을 하면 음성을 STT 엔진(음성 텍스트 전환) → 언어변환(한글 영어 번역) → Stable Diffusion(영어 텍스트를 치타서비스의 올려있는 Stable Difusion이라는 AI 모델)에 보내서 그림을 그려줍니다.<br/>
+            <br/>
+            [알려줘] 사용자가 "고래가 다리가 몇 개인지 알려줘"라는 말을 하면, STT엔지(음성 텍스트 전환) → 언어변환(한글 영어 번역) → openAI(응답 가능한 AI에서 응답을 영어로 받고 → Stable Difusion에서 그림 생성합니다.<br/>
+            <br/>
+            AI 모델 훈련하여 이를 최종목표인 AI 서비스를 빠르게 출시해야 합니다.<br/>
+            <br/>
+            이러한 필요성에 MLOps플랫폼 치타와 DevOps플랫폼 세렝게티로 나만의 AI 서비스를 만들어보세요.<br/>
+            <br/>
+            www.aifrica.co.kr<br/>
+            ⓒ에이프리카
+        </div>
+
+        <div class="more-button" (click)="moreText = !moreText">
+            <span *ngIf="!moreText">더보기</span>
+            <span *ngIf="moreText">간략히</span>
+        </div>
+    </div>
+
+    <div class="image-container">
+        <img src="../../../assets/image/desc1.png">
+        <img src="../../../assets/image/desc2.png">
+    </div>
+</div>

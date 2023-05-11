@@ -1,0 +1,55 @@
+<ng-container *ngIf="getImageDetailEvent">
+    <div class="detail-container">
+        <div class="backEvent-container">
+            <span (click)="backEvent()">뒤로가기</span>
+        </div>
+
+        <ng-container *ngIf="!gridaSession">
+            <div class="shareEvent-container">
+                <span (click)="kakaoShare()">공유하기</span>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="gridaSession">
+            <div class="deleteEvent-container">
+                <span (click)="deleteImage()">삭제</span>
+            </div>
+        </ng-container>
+
+        <div class="header-container">
+            <div class="title-container">
+                <div class="title">
+                    <span>{{imageRequest.prompt}}</span>
+
+                    <ng-container *ngIf="gridaSession">
+                        <ng-container *ngIf="!imageRequest.isLike">
+                            <mat-icon class="like" (click)="like()">favorite_border</mat-icon>
+                        </ng-container>
+                        <ng-container *ngIf="imageRequest.isLike">
+                            <mat-icon class="like" (click)="like()">favorite</mat-icon>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </div>
+
+            <div class="info">
+                <span>{{imageRequest.translatedPrompt}}</span>
+            </div>
+
+            <div class="date-hit">
+                <!-- <span>{{imageRequest.userName}}</span> -->
+                <span>{{imageRequest.createdAt | date: 'medium'}}</span>
+                <span>조회수 {{imageRequest.hit}}</span>
+            </div>
+        </div>
+
+        <div class="image-container">
+            <img class="image" src="{{imageURL+imageRequest.imageUrl}}">
+        </div>
+
+        <!-- <div class="name-container">
+            <div class="name">
+                <span>{{imageRequest.userName}}</span>
+            </div>
+        </div> -->
+    </div>
+</ng-container>

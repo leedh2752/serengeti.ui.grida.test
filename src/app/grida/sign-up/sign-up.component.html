@@ -1,0 +1,71 @@
+<div class="signUp-container">
+    <div class="header-container">
+        <h1>그리다 가입하기</h1>
+    </div>
+
+    <div class="input-container">
+        <form [formGroup]="form">
+            <mat-form-field>
+                <mat-label>아이디</mat-label>
+                <input matInput type="text" placeholder="아이디" [formControl]="idReg" [(ngModel)]="id">
+                <mat-error *ngIf="idReg.errors?.required">
+                    <span>아이디는 필수 입력사항 입니다.</span>
+                </mat-error>
+                <mat-error *ngIf="idReg.errors?.required">
+                    <span>아이디는 이메일 형식으로 작성해 주세요.</span>
+                </mat-error>
+            </mat-form-field>
+                        
+            <mat-form-field>
+                <mat-label>이름</mat-label>
+                <input matInput type="text" placeholder="이름" [formControl]="nameReg" [(ngModel)]="name">
+                <mat-error *ngIf="nameReg.errors?.required">
+                    <span>이름은 필수 입력사항 입니다.</span>
+                </mat-error>
+            </mat-form-field>
+            
+            <mat-form-field>
+                <mat-label>닉네임</mat-label>
+                <input matInput type="text" placeholder="닉네임" [formControl]="nickNameReg" [(ngModel)]="nickName">
+                <mat-error *ngIf="nickNameReg.errors?.required">
+                    <span>닉네임 필수 입력사항 입니다.</span>
+                </mat-error>
+            </mat-form-field>
+            
+            <mat-form-field>
+                <mat-label>번호</mat-label>
+                <input matInput type="text" placeholder="번호" [formControl]="phoneNumberReg" [(ngModel)]="phoneNumber">
+            </mat-form-field>
+            
+            <mat-form-field>
+                <mat-label>소속</mat-label>
+                <input matInput type="text" placeholder="소속" [formControl]="teamReg" [(ngModel)]="team">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>비밀번호</mat-label>
+                <input matInput type="password" placeholder="비밀번호" [formControl]="pwReg" [(ngModel)]="pw">
+                <mat-error *ngIf="pwReg.errors?.required">
+                    <span>비밀번호는 필수 입력사항 입니다.</span>
+                </mat-error>
+            </mat-form-field>
+            
+            <mat-form-field>
+                <mat-label>비밀번호 확인</mat-label>
+                <input matInput type="password" placeholder="비밀번호" [formControl]="repeatPwReg" [(ngModel)]="repeatPw">
+                <mat-error *ngIf="!repeatPwReg.hasError('required') && repeatPwReg != pwReg">
+                    <span translate>비밀번호가 맞지 않습니다. 다시 확인해 주세요.</span>
+                </mat-error>
+            </mat-form-field>
+        </form>
+    </div>
+
+    <div class="button-container">
+        <button mat-raised-button (click)="doSignUp()">
+            <span>회원가입</span>
+        </button>
+        <button mat-raised-button (click)="goBack()">
+            <span>뒤로</span>
+        </button>
+    </div>
+</div>

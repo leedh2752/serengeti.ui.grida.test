@@ -1,0 +1,141 @@
+<div class="chatbot-container">
+  <div class="gritalk-desc">
+    <span><H1>POOMGPT와 대화하세요!</H1> <br> 일상적인 대화 뿐만 아니라, 이미지 생성(그려줘), 날씨, 환율, 이미지 설명<br>문서 요약(txt,hwp,pdf,doc,docx) 에 관해서도 능숙하게 답변합니다! </span>
+  </div>
+
+  <div class="mode-toggle-div">
+    <mat-button-toggle-group value="text" (change)="changeMode($event.value)">
+      <mat-button-toggle value="voice">VOICE</mat-button-toggle>
+      <mat-button-toggle value="text">TEXT</mat-button-toggle>
+    </mat-button-toggle-group>
+    <button *ngIf=muteMode mat-raised-button (click)="mute()">SOUND OFF</button>
+    <button *ngIf=!muteMode mat-raised-button class="on" (click)="mute()">SOUND ON</button>
+  </div>
+
+
+  <div class="dragAndDrop-container" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
+    <div class="drag-box" [class.dragging]="dragging">
+      <span>이곳에 파일을 끌어다 놓으세요</span>
+    </div>
+    <div id="view" class="view-container">
+      <ng-container *ngFor="let chatRequest of chatRequests">
+        <div style="white-space:pre-line;" class="chat-box" [class.user]="chatRequest.role === 'user'"
+             [class.ai]="chatRequest.role === 'assistant'">
+          <ng-container *ngIf="chatRequest.message !== 'null' && chatRequest.message !== 'error'">
+            <ng-container *ngIf="chatRequest.role === 'user'">
+              <span class="user user-title">나</span>
+            </ng-container>
+
+            <ng-container *ngIf="chatRequest.role === 'assistant'">
+              <span class="ai ai-title">그리톡</span>
+            </ng-container>
+
+            <div [class.content]="chatRequest.role === 'assistant'">
+              <div class="chat" [class.user-chat]="chatRequest.role === 'user'"
+                    [class.ai-chat]="chatRequest.role === 'assistant'"
+                    [class.system]="chatRequest.role === 'system'">
+
+                <!-- type이 이미지 일때-->
+                <ng-container *ngIf="chatRequest.type === 'image'">
+                  <img [src]="findImage(chatRequest.imageId)">
+                </ng-container>
+
+                  <ng-template
+                    [ngIf]="chatRequest.role === 'assistant'&&(chatRequest.message.includes('```'))"
+                    [ngIfElse]="user" ]>
+
+                    <markdown
+                      class="markdown"
+                      [data]="chatRequest.message"
+                      (mouseenter)="mouseOverMarkdown()"
+                      (mouseleave)="mouseOverMarkdown()"
+                      (click)="copyCode($event.target.innerText)">
+                    </markdown>
+
+                    <!-- <ngx-codemirror [options]="codeMirrorOptions"
+                                    [(ngModel)]="chatRequest.message"></ngx-codemirror> -->
+                    <div class="copy-container">
+                      <button mat-raised-button class="copy_button" (click)="copyCode(chatRequest.message)">
+                        <span>클립보드에 복사하기!</span>
+                      </button>
+                    </div>
+                  </ng-template>
+
+                  <ng-template #user>
+                    <div class="text-file">
+                      <span>{{chatRequest.message}}</span>
+                      <mat-icon *ngIf="chatRequest.type === 'textFile'">upload_file</mat-icon>
+                    </div>
+                  </ng-template>
+              </div>
+
+              <ng-container *ngIf="chatRequest.role === 'assistant'">
+                <div class="share-container">
+                  <button mat-icon-button [matMenuTriggerFor]="shareMenu">
+                    <mat-icon class="share-button">share</mat-icon>
+                  </button>
+                </div>
+
+                <mat-menu class="share-menu" #shareMenu="matMenu">
+                  <!-- <a id="kakaotalk-sharing-btn" href="javascript:;" (click)="share('kakao', chatRequest.message)">
+                    <img src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png"
+                      alt="카카오톡 공유 보내기 버튼" />
+                  </a> -->
+                  <button mat-menu-item (click)="share('kakao', chatRequest.message)">
+                    <div>
+                      <!-- <img class="logo" src="../../../assets/image/kakao_logo.png"> -->
+                      <span>카카오톡으로 공유하기</span>
+                    </div>
+                  </button>
+                  <!-- <button mat-menu-item (click)="share('facebook', chatRequest.message)">
+                    <div>
+                      <span>페이스북으로 공유하기</span>
+                    </div>
+                  </button> -->
+                </mat-menu>
+              </ng-container>
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="question-container" *ngIf="inputMode==='voice'">
+      <ng-container *ngIf="!questioning">
+        <button mat-raised-button class="mic-button" (click)="generateAnswerToVoice()">
+          <mat-icon>settings_voice</mat-icon>
+        </button>
+      </ng-container>
+
+      <ng-container *ngIf="questioning">
+        <button mat-raised-button class="mic-button, speaking" (click)="generateAnswerToVoice()">
+          <mat-icon>graphic_eq</mat-icon>
+        </button>
+      </ng-container>
+    </div>
+
+    <div class="question-container" *ngIf="inputMode==='text'">
+      <input id="text" class="text" [(ngModel)]="questions" (keyup.enter)="generateAnswerToText()"
+             [readonly]="generatingAnswer" autofocus autocomplete="off">
+
+      <button mat-raised-button (click)="generateAnswerToText()">
+        <mat-icon>subdirectory_arrow_left</mat-icon>
+      </button>
+    </div>
+
+    <div class="gritalk-desc">
+      <span>지금까지 {{talkCount}}명이 POOMGPT 서비스를 이용해 주셨어요!</span>
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="generatingAnswer">
+  <div class="spinner-container">
+    <mat-spinner color="accent"></mat-spinner>
+  </div>
+  <div class="background-container"></div>
+</ng-container>
+
+<div id="cursorFollower" [hidden]="!cursorFollower">
+  <span>copy!</span>
+</div>

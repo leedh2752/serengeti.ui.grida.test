@@ -1,0 +1,13 @@
+<div class="dialog-container">
+    <ng-container *ngIf="status === 'login'">
+        <div class="login-container">
+            <app-login (signUpEvent)="signUpEvent($event)"></app-login>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="status === 'signUp'">
+        <div class="signUp-container">
+            <app-sign-up (goBackEvent)="goBackEvent($event)"></app-sign-up>
+        </div>
+    </ng-container>
+</div>

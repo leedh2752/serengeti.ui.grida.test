@@ -1,0 +1,30 @@
+.signUp-container {
+    width: 300px;
+
+    .header-container {
+        text-align: center;
+    }
+    
+    .input-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        mat-form-field {
+            width: 100%;
+        }
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        button {
+            margin: 10px 5px 10px 5px;
+            color: whitesmoke;
+            background-color: #303030;
+        }
+    }
+}

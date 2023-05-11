@@ -1,0 +1,67 @@
+<div class="agree-container">
+    <div class="title-container">
+        <h1>개인정보 수집 및 이용 동의</h1>
+    </div>
+
+    <div class="input-container">
+        <form [formGroup]="form">
+            <mat-form-field color="accent">
+                <input matInput type="text" placeholder="이름"
+                [maxLength]="16" [formControl]="nameReg" [(ngModel)]="userName">
+            </mat-form-field>
+
+            <mat-form-field color="accent">
+                <input matInput type="text" placeholder="핸드폰 번호 ( - 는 빼고 입력해주세요)"
+                [formControl]="phoneReg" [(ngModel)]="userPhone">
+            </mat-form-field>
+
+            <mat-form-field color="accent">
+                <input matInput type="text" placeholder="이메일"
+                [maxLength]="32" [formControl]="emailReg" [(ngModel)]="userEmail">
+            </mat-form-field>
+
+            <mat-form-field color="accent">
+                <input matInput type="text" placeholder="소속"
+                [maxlength]="32" [formControl]="organizationReg" [(ngModel)]="userOrganization">
+            </mat-form-field>
+        </form>
+
+        <div class="check-container">
+            <!-- <input type="checkbox"> -->
+            <section>
+                <mat-checkbox (change)="checkEvent($event.checked)">
+                    <span>개인정보 수집 및 이용에 동의합니다.</span>
+                </mat-checkbox>
+            </section>
+        </div>
+    </div>
+
+    <div class="inflow-container">
+        <span>그리다를 방문하게 된 경로를 선택해주세요.</span>
+        <mat-radio-group aria-label="Select an option" [(ngModel)]="inflowRoute">
+            <mat-radio-button [value]="facebook">Facebook</mat-radio-button>
+            <mat-radio-button [value]="instagram">Instagram</mat-radio-button>
+            <mat-radio-button [value]="other">기타 sns</mat-radio-button>
+            <input type="text" *ngIf="inflowRoute=='other'" [(ngModel)]="inflowRouteOther">
+        </mat-radio-group>
+    </div>
+
+    <div class="button-container">
+        <button mat-raised-button (click)="userRegistration()">
+            <span>등록</span>
+        </button>
+        <!-- <button mat-raised-button [mat-dialog-close]="userRegistrationInfo">
+            <span>등록</span>
+        </button> -->
+        <button mat-raised-button [mat-dialog-close] (click)="close()">
+            <span>닫기</span>
+        </button>
+    </div>
+</div>
+
+<ng-container *ngIf="registering">
+    <div class="backgroud-spinner-container">
+        <mat-spinner color="accent"></mat-spinner>
+    </div>
+    <div class="background-container"></div>
+</ng-container>

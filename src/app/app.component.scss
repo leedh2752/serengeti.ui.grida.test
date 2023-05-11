@@ -1,0 +1,80 @@
+.app-container {
+
+    .nav-container {
+        width: 80%;
+        margin-left: 10%;
+    }
+
+    .view-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .footer-container {
+        color: whitesmoke;
+        background-color: #303030;
+    }
+
+    .icon-container {
+        position: fixed;
+        right: 10px;
+        bottom: 20px;
+
+        .button-container {
+
+            button {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 5px;
+                box-shadow: 1px 1px 1px 1px rgb(211, 204, 204);
+                background-color: whitesmoke;
+            }
+        }
+    }
+
+    .account-container {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 10px;
+        right: 10px;
+
+        span {
+            font-size: small;
+        }
+    }
+}
+
+@media screen and (min-width: 280px) and (max-width: 896px) {
+    .app-container {
+
+        .nav-container {
+            width: 100%;
+            margin-left: 0;
+        }
+
+        .icon-container {
+            bottom: 20px;
+        }
+
+        .account-container {
+
+            mat-icon {
+                width: max-content;
+                height: max-content;
+                font-size: 18px;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 712px) and (max-width: 1180px) {
+    .app-container {
+
+        .icon-container {
+            bottom: 20px;
+        }
+    }
+}

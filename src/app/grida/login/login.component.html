@@ -1,0 +1,56 @@
+<div class="login-container">
+    <div class="input-container">
+        <form [formGroup]="form">
+            <mat-form-field>
+                <mat-label>아이디</mat-label>
+                <input matInput type="text" placeholder="아이디" [formControl]="idReg" [(ngModel)]="id">
+                <!-- <mat-error *ngIf="idReg.errors?.required">
+                    <span>아이디는 필수 입력사항 입니다.</span>
+                </mat-error> -->
+                <mat-error *ngIf="id !== adminId">
+                    <span>아이디가 일치하지 않습니다.</span>
+                </mat-error>
+            </mat-form-field>
+            
+            <mat-form-field>
+                <mat-label>비밀번호</mat-label>
+                <input matInput type="password" placeholder="비밀번호" [formControl]="pwReg" [(ngModel)]="pw" (keyup.enter)="login()">
+                <mat-error *ngIf="pwReg.errors?.required">
+                    <span>비밀번호는 필수 입력사항 입니다.</span>
+                </mat-error>
+            </mat-form-field>
+        </form>
+    </div>
+
+    <div class="button-container">
+        <button mat-raised-button (click)="login()">
+            <span>로그인</span>
+        </button>
+
+        <button mat-raised-button (click)="signUp()">
+            <span>회원가입</span>
+        </button>
+        
+        <button mat-raised-button [matDialogClose]>
+            <span>닫기</span>
+        </button>
+    </div>
+
+    <!-- <div class="sns-container">
+        <button mat-icon-button>
+            <img src="../../../assets/image/google_logo.png" (click)="googleLogin()">
+        </button>
+        <button mat-icon-button>
+            <img src="../../../assets/image/naver_logo.png" (click)="naverLogin()">
+        </button>
+        <button mat-icon-button>
+            <a href="https://kauth.kakao.com/oauth/authorize?client_id=${ba68adeffbb471b6b3a07544444a374e}&redirect_uri=${http://localhost:4200}&response_type=code HTTP/1.1">
+                <img src="../../../assets/image/kakao_logo.png" (click)="kakaoLogin()">
+            </a>
+        </button>
+    </div>
+
+    <div class="find-password-container">
+        <span (click)="findPassword()">Forgot Your Password?</span>
+    </div> -->
+</div>

@@ -1,0 +1,141 @@
+.agree-container {
+    width: 400px;
+
+    .title-container {
+        text-align: center;
+    }
+
+    .input-container {
+        display: flex;
+        flex-direction: column;
+
+        form {
+
+            mat-form-field {
+                width: 100%;
+            }
+
+            .check-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 20px 0px 10px 0px;
+    
+                mat-checkbox {
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
+
+    .inflow-container {
+        display: flex;
+        flex-direction: column;
+        margin: 30px 0px 20px 0px;
+
+        span {
+            font-size: medium;
+        }
+
+        mat-radio-group {
+            margin-top: 5px;
+
+            mat-radio-button {
+                margin-right: 20px;
+            }
+        }
+    }
+
+    .button-container {
+        margin-top: 30px;
+
+        button {
+            float: right;
+            margin-left: 5px;
+            color: whitesmoke;
+            background-color: #303030;
+        }
+    }
+}
+
+.backgroud-spinner-container {
+    position: absolute;
+    top: calc(50% - 50px);
+    left: calc(50% - 50px);
+    width: 100px;
+    height: 100px;
+    z-index: 999;
+}
+
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #303030;
+    z-index: 999;
+    opacity: 0.3;
+}
+
+@media screen and (min-width: 280px) and (max-width: 896px) {
+    .agree-container {
+        width: 100%;
+        font-size: smaller;
+
+        .inflow-container {
+
+            span {
+                font-size: small;
+            }
+        }
+
+        .button-container {
+            
+            button {
+                
+                span {
+                    font-size: smaller;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 280px) and (max-width: 896px) and (orientation: landscape) {
+    .agree-container {
+        width: 300px;
+    }
+}
+
+@media screen and (min-width: 712px) and (max-width: 1180px) {
+    .agree-container {
+        width: 400px;
+
+        .inflow-container {
+
+            span {
+                font-size: medium;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 712px) and (max-width: 1180px) and (orientation: landscape) {
+
+}
+
+:host ::ng-deep .mat-radio-outer-circle {
+    width: 15px;
+    height: 15px;
+}
+
+:host ::ng-deep .mat-radio-inner-circle {
+    width: 15px;
+    height: 15px;
+}
+
+:host ::ng-deep .mat-radio-label-content {
+    padding-left: 0;
+    font-size: smaller;
+}

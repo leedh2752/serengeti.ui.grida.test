@@ -1,0 +1,452 @@
+.chatbot-container {
+    position: relative;
+    width: 80rem;
+
+    img {
+      border-radius: 10px;
+      width: 100%;
+      height: auto;
+    }
+
+    .gritalk-desc {
+        margin-top: 15px;
+        text-align: center;
+
+        span {
+            margin: 20px 0px 20px 0px;
+            font-size: large;
+        }
+    }
+
+    .gritalk-desc:nth-last-child(1) {
+        margin-bottom: 50px;
+    }
+
+    .mode-toggle-div {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-top: 10px;
+      font-family: "주아체";
+
+      .on {
+        background-color: rgb(20, 20, 20);
+        color: whitesmoke;
+        border: 2px solid rgb(61, 255, 49);
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+      }
+
+      button {
+        width: max-content;
+        height: max-content;
+      }
+
+      mat-button-toggle-group {
+
+        .mat-button-toggle {
+          width: max-content;
+          height: max-content;
+          font-family: "주아체";
+        }
+  
+        .mat-button-toggle:not(.mat-button-toggle-checked) {
+          margin: 2px;
+        }
+  
+        .mat-button-toggle-checked {
+          background-color: rgb(20, 20, 20);
+          color: whitesmoke;
+          border: 2px solid rgb(61, 255, 49);
+          box-sizing: border-box;
+          -webkit-box-sizing: border-box;
+          -moz-box-sizing: border-box;
+        }
+      }
+
+    }
+
+    .dragAndDrop-container {
+      position: relative;
+
+      .drag-box {
+        display: none;
+      }
+      .dragging {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: whitesmoke;
+        border: 3px dotted black;
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        z-index: 999;
+      }
+
+      .view-container {
+          display: flex;
+          flex-direction: column;
+          height: 80vh;
+          margin: 10px 0px 10px 0px;
+          padding: 15px;
+          background-color: rgb(90, 55, 187);
+          border-radius: 5px;
+          overflow: scroll;
+          font-size: large;
+
+          .chat-box {
+              display: flex;
+              max-width: 90%;
+              flex-direction: column;
+              margin-bottom: 10px;
+              z-index: 2;
+
+              .content {
+                display: flex;
+
+                .share-container {
+                  position: relative;
+
+                  button {
+                    position: absolute;
+                    bottom: 0;
+
+                    .share-button {
+                      color: black;
+                      background-color: white;
+                      border-radius: 5px;
+                      opacity: 0.9;
+                    }
+                  }
+                }
+
+                .share-menu {
+
+                  button {
+
+                    div {
+                      display: flex;
+                      align-items: center;
+
+                      span {
+                        margin-left: 5px;
+                      }
+                    }
+                  }
+                }
+              }
+
+              .chat {
+                width: max-content;
+                height: max-content;
+                max-width: 600px;
+                margin-top: 5px;
+                padding: 10px;
+                border-radius: 10px;
+
+                .copy-container {
+                  margin-top: 30px;
+
+                  .copy_button {
+                    width: 100%;
+                    background-color: #303030;
+                    color:white;
+                  }
+                }
+
+                .text-file {
+                  display: flex;
+                  align-items: center;
+
+                  mat-icon {
+                    margin-left: 10px;
+                    padding: 5px;
+                    border: 2px solid black;
+                    border-radius: 50%;
+                  }
+                }
+              }
+
+              .user-chat {
+                  float: right;
+                  background-color: whitesmoke;
+              }
+
+              .ai-chat {
+                  background-color: rgb(20, 20, 20);
+                  color: whitesmoke;
+              }
+
+              .system {
+                display: none;
+              }
+          }
+
+          .user {
+              display: flex;
+              margin-left: auto;
+          }
+
+          .user-title, .ai-title {
+              color: silver;
+          }
+      }
+
+      .view-container::-webkit-scrollbar {
+          width: 0;
+      }
+
+      .question-container {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          height: 5vh;
+
+          .text {
+              width: 85%;
+              height: 90%;
+              margin-top: 3px;
+              resize: none;
+              border: 2px solid black;
+              font-size: large;
+              border-radius: 3px;
+              padding-left: 10px;
+              font-family: "주아체";
+          }
+
+        .mic-button{
+          width: 100%;
+        }
+
+        button {
+            width: 10%;
+            height: 100%;
+
+            //margin-left: 5px;
+            margin-top: 3px;
+            color: whitesmoke;
+            background-color: #303030;
+        }
+
+        .speaking {
+            width: 100%;
+            animation: motion 0.5s linear 0s infinite alternate;
+        }
+        @keyframes motion {
+            0% {background-color: rgb(186, 19, 19);}
+            100% {background-color: rgb(255, 37, 37);}
+        }
+      }
+    }
+}
+
+markdown {
+  cursor: pointer;
+}
+
+#cursorFollower {
+  position: absolute;
+  width: max-content;
+  padding: 5px;
+  background-color: whitesmoke;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px 1px gray;
+  z-index: 999;
+  pointer-events: none;
+}
+
+@media screen and (min-width: 280px) and (max-width: 896px) {
+    .chatbot-container {
+        width: 95%;
+        margin-left: 2.5%;
+        margin-bottom: 30px;
+
+        .gritalk-desc {
+
+          span {
+            font-size: small;
+          }
+        }
+
+        .dragAndDrop-container {
+
+          .view-container {
+              height: 45vh;
+              font-size: smaller;
+
+              .chat-box {
+
+                  .chat {
+                      max-width: 200px;
+                  }
+              }
+          }
+
+          .question-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+
+            .mic-button{
+              width: 100%;
+            }
+
+            .text {
+              width: 85%;
+              height: 90%;
+              margin-top: 3px;
+              resize: none;
+              border: 2px solid black;
+              border-radius: 3px;
+              padding-left: 10px;
+              font-family: "주아체";
+              font-size: large;
+            }
+
+            button {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              margin: 4px;
+              color: whitesmoke;
+              background-color: #303030;
+            }
+          }
+        }
+    }
+}
+
+@media screen and (min-width: 712px) and (max-width: 1180px) {
+    .chatbot-container {
+        width: 35rem;
+
+        .gritalk-desc {
+
+            span {
+              font-size: large;
+            }
+        }
+
+        .dragAndDrop-container {
+
+          .view-container {
+              height: 50vh;
+              font-size: medium;
+
+              .chat-box {
+
+                  .chat {
+                      max-width: 250px;
+                  }
+              }
+          }
+
+          .question-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+
+            .mic-button{
+              width: 100%;
+            }
+            .text {
+              width: 85%;
+              height: 90%;
+              margin-top: 3px;
+              resize: none;
+              border: 2px solid black;
+              border-radius: 3px;
+              padding-left: 10px;
+              font-family: "주아체";
+              font-size: large;
+            }
+
+            button {
+              width: 10%;
+              height: 100%;
+
+              //margin-left: 5px;
+              margin-top: 3px;
+              color: whitesmoke;
+              background-color: #303030;
+            }
+          }
+        }
+    }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1366px) {
+    .chatbot-container {
+        width: 50rem;
+
+        .gritalk-desc {
+            margin-top: 15px;
+            text-align: center;
+
+            span {
+              font-size: 20pt;
+            }
+        }
+    }
+
+    .dragAndDrop-container {
+
+      .question-container {
+        display: flex;
+        justify-content: space-between;;
+        width: 100%;
+
+        .mic-button{
+          width: 100%;
+        }
+        .text {
+          width: 85%;
+          height: 90%;
+          margin-top: 3px;
+          resize: none;
+          border: 2px solid black;
+          border-radius: 3px;
+          padding-left: 10px;
+          font-family: "주아체";
+          font-size: large;
+        }
+
+        button {
+          width: 10%;
+          height: 100%;
+
+          //margin-left: 5px;
+          margin-top: 3px;
+          color: whitesmoke;
+          background-color: #303030;
+        }
+      }
+    }
+}
+
+.spinner-container {
+    position: absolute;
+    top: calc(50% - 50px);
+    left: calc(50% - 50px);
+    width: 100px;
+    height: 100px;
+    z-index: 999;
+}
+
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #303030;
+    z-index: 999;
+    opacity: 0.3;
+}
+

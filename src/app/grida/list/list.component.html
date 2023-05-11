@@ -1,0 +1,74 @@
+<div class="list-container">
+    <div class="sort-container" [class.on]="imageRequests">
+        <mat-radio-group aria-label="Select an option" *ngIf="gridaSession" [(ngModel)]="sortValue">
+            <mat-radio-button [value]="newest" (click)="getList(newest,1)" (click)="pageInitialization()">최신순</mat-radio-button>
+            <mat-radio-button [value]="popular" (click)="getList(popular,1)" (click)="pageInitialization()">인기순</mat-radio-button>
+            <!-- <ng-container>
+                <mat-radio-button [value]="disApproval" (click)="getList(disApproval)" (click)="pageInitialization()">승인 대기 목록</mat-radio-button>
+            </ng-container> -->
+        </mat-radio-group>
+    </div>
+
+  <ng-container *ngIf="imageRequests">
+        <ng-container *ngIf="imageRequests.count !== 0; else empty">
+            <div class="count-container">
+                <span>Total : {{imageRequests.count}}</span>
+            </div>
+
+            <div class="image-container">
+                <ng-container *ngFor="let imageRequest of imageRequests.data">
+                    <div class="image-box">
+                        <img class="image" src="{{imageURL+imageRequest.imageUrl}}" (click)="goDetail(imageRequest)">
+
+                        <ng-template #Approval>
+                            <ng-container *ngIf="gridaSession">
+                                <ng-container *ngIf="!imageRequest.isLike">
+                                    <mat-icon class="like" (click)="like(imageRequest)">favorite_border</mat-icon>
+                                </ng-container>
+                                <ng-container *ngIf="imageRequest.isLike">
+                                    <mat-icon class="like" (click)="like(imageRequest)">favorite</mat-icon>
+                                </ng-container>
+                            </ng-container>
+
+                            <span class="list-prompt">{{imageRequest.prompt}}</span>
+                        </ng-template>
+
+                        <ng-container *ngIf="sortValue === 'disApproval'; else Approval">
+                            <div class="button-container">
+                                <button mat-raised-button (click)="delete(imageRequest)">
+                                    <span>삭제</span>
+                                </button>
+                                <button mat-raised-button (click)="approval(imageRequest)">
+                                    <span>승인</span>
+                                </button>
+                            </div>
+                        </ng-container>
+                    </div>
+                </ng-container>
+            </div>
+
+            <div class="paging-container">
+                <div class="paging">
+                    <ng-container *ngIf="this.currentPage !== 1">
+                        <mat-icon class="prev" (click)="pagingEvent(this.currentPage-1)">navigate_before</mat-icon>
+                    </ng-container>
+
+                    <ng-container *ngFor="let page of pages; let pageNumber = index">
+                        <span [class.on]="currentPage === page" (click)="pagingEvent(page)">{{page}}</span>
+                    </ng-container>
+
+                    <ng-container *ngIf="this.currentPage !== this.totalPage">
+                        <mat-icon class="next" (click)="pagingEvent(this.currentPage+1)">navigate_next</mat-icon>
+                    </ng-container>
+                </div>
+            </div>
+        </ng-container>
+    </ng-container>
+
+    <ng-template #empty>
+        <div class="empty-container">
+            <span>생성된 이미지가 없습니다.</span>
+        </div>
+    </ng-template>
+</div>
+
