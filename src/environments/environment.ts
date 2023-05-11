@@ -4,5 +4,5 @@ export const environment = {
   adminId: 'aifrica',
   adminPassword: 'aifrica1!',
   loginId: 'administrator',
-  gridaEndPoint: 'http://localhost:3309/'
+  gridaEndPoint: 'http://110.45.179.12:3309/'
 };
