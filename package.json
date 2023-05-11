@@ -13,7 +13,7 @@
     "serve:ssr": "node dist/grida/server/main.js",
     "build:ssr": "ng build && ng run grida:server",
     "prerender": "ng run grida:prerender",
-    "vercel-build": "npm run build:ssr"
+    "vercel-build": "npm run build"
   },
   "private": true,
   "dependencies": {
